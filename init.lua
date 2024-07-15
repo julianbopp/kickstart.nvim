@@ -577,7 +577,9 @@ require('lazy').setup({
         -- But for many setups, the LSP (`tsserver`) will work just fine
         -- tsserver = {},
         --
-
+        lemminx = {
+          filetypes = { 'xml', 'xsd', 'xsl', 'xslt', 'svg', 'conaryrecipe' },
+        },
         lua_ls = {
           -- cmd = {...},
           -- filetypes = { ...},
