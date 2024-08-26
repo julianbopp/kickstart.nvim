@@ -185,6 +185,9 @@ vim.g.slime_python_ipython = 1
 -- See `:help 'confirm'`
 vim.o.confirm = true
 
+-- Set tab size to
+vim.opt.tabstop = 4
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
