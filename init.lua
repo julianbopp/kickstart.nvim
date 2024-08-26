@@ -154,6 +154,9 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
+-- Set tab size to
+vim.opt.tabstop = 4
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
@@ -580,6 +583,18 @@ require('lazy').setup({
         --
         lemminx = {
           filetypes = { 'xml', 'xsd', 'xsl', 'xslt', 'svg', 'conaryrecipe' },
+          settings = {
+            xml = {
+              format = {
+                splitAttributes = true,
+                joinCDATALines = false,
+                joinContentLines = false,
+                joinCommentLines = false,
+                spaceBeforeEmptyCloseTag = false,
+                enabled = true,
+              },
+            },
+          },
         },
         lua_ls = {
           -- cmd = {...},
@@ -635,7 +650,7 @@ require('lazy').setup({
       {
         '<leader>f',
         function()
-          require('conform').format { async = true, lsp_fallback = true }
+          require('conform').format { async = true, lsp_fallback = false }
         end,
         mode = '',
         desc = '[F]ormat buffer',
@@ -647,7 +662,7 @@ require('lazy').setup({
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
         -- languages here or re-enable it for the disabled ones.
-        local disable_filetypes = { c = true, cpp = true }
+        local disable_filetypes = { c = true, cpp = true, xml = false, conaryrecipe = true }
         return {
           timeout_ms = 500,
           lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
@@ -655,6 +670,7 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
+        xml = { 'xmlformat' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
@@ -882,6 +898,7 @@ require('lazy').setup({
   require 'kickstart.plugins.autopairs',
   require 'kickstart.plugins.ts-autotag',
   require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.tagalong',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
