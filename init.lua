@@ -905,6 +905,7 @@ require('lazy').setup({
   require 'kickstart.plugins.ts-autotag',
   require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.tagalong',
+  require 'kickstart.plugins.copilot',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
