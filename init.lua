@@ -157,6 +157,12 @@ vim.opt.scrolloff = 10
 -- Set tab size to
 vim.opt.tabstop = 4
 
+-- Set tab shift size to
+vim.opt.shiftwidth = 4
+
+-- On pressing tab, insert 4 spaces
+vim.opt.expandtab = true
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
