@@ -98,6 +98,7 @@ vim.g.have_nerd_font = true
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
 
+vim.opt.conceallevel = 2
 -- Make line numbers default
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
@@ -904,6 +905,7 @@ require('lazy').setup({
   require 'kickstart.plugins.autopairs',
   require 'kickstart.plugins.ts-autotag',
   require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.render-markdown',
   require 'kickstart.plugins.tagalong',
   require 'kickstart.plugins.copilot',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
