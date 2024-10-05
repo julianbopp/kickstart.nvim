@@ -197,6 +197,10 @@ vim.keymap.set('n', '<leader>bd', '<cmd>bd<CR>', { desc = 'Close buffer' })
 vim.opt.hlsearch = true
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
+-- Map <leader> bd to close the current buffer
+vim.keymap.set('n', '<leader>bd', '<cmd>bd<CR>', { desc = 'Close buffer' })
+-- Set highlight on search, but clear on pressing <Esc> in normal mode
+vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
