@@ -922,6 +922,7 @@ require('lazy').setup({
   require 'kickstart.plugins.copilot',
   require 'kickstart.plugins.vim-slime',
   require 'kickstart.plugins.vimtex',
+  require 'kickstart.plugins.vim-tmux-navigator',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
