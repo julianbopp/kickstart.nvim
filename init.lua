@@ -924,6 +924,7 @@ require('lazy').setup({
   require 'kickstart.plugins.vimtex',
   require 'kickstart.plugins.vim-tmux-navigator',
   require 'kickstart.plugins.refactor',
+  require 'kickstart.plugins.lsp-file-operations',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
@@ -953,6 +954,17 @@ require('lazy').setup({
     },
   },
 })
+local lspconfig = require 'lspconfig'
 
+-- Set global defaults for all servers
+lspconfig.util.default_config = vim.tbl_extend('force', lspconfig.util.default_config, {
+  capabilities = vim.tbl_deep_extend(
+    'force',
+    vim.lsp.protocol.make_client_capabilities(),
+    -- returns configured operations if setup() was already called
+    -- or default operations if not
+    require('lsp-file-operations').default_capabilities()
+  ),
+})
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
