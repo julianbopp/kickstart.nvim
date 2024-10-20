@@ -164,9 +164,15 @@ vim.opt.shiftwidth = 4
 -- On pressing tab, insert 4 spaces
 vim.opt.expandtab = true
 
+-- set vim-slime target
+vim.g.slime_target = 'tmux'
+vim.g.slime_python_ipython = 1
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
+-- Map <leader> bd to close the current buffer
+vim.keymap.set('n', '<leader>bd', '<cmd>bd<CR>', { desc = 'Close buffer' })
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
@@ -369,7 +375,12 @@ require('lazy').setup({
         --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
         --   },
         -- },
-        -- pickers = {}
+        pickers = {
+          buffers = {
+            sort_mru = true,
+            sort_lastused = true,
+          },
+        },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
@@ -810,7 +821,7 @@ require('lazy').setup({
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
+      vim.cmd.colorscheme 'retrobox'
 
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
@@ -866,6 +877,7 @@ require('lazy').setup({
       auto_install = true,
       highlight = {
         enable = true,
+        disable = { 'latex' },
         -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
         --  If you are experiencing weird indenting issues, add the language to
         --  the list of additional_vim_regex_highlighting and disabled languages for indent.
@@ -908,6 +920,9 @@ require('lazy').setup({
   require 'kickstart.plugins.render-markdown',
   require 'kickstart.plugins.tagalong',
   require 'kickstart.plugins.copilot',
+  require 'kickstart.plugins.vim-slime',
+  require 'kickstart.plugins.vimtex',
+  require 'kickstart.plugins.vim-tmux-navigator',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
