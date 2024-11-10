@@ -212,7 +212,8 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
-vim.keymap.set('n', '<leader>ef', vim.cmd.Ex, { desc = 'Open Built in file explorer' })
+-- vim.keymap.set('n', '<leader>ef', vim.cmd.Ex, { desc = 'Open Built in file explorer' })
+vim.keymap.set('n', '<leader>ef', '<CMD>Oil<CR>', { desc = 'Open OIL file explorer' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -922,7 +923,7 @@ require('lazy').setup({
   -- require 'kickstart.plugins.lint',
   require 'kickstart.plugins.autopairs',
   require 'kickstart.plugins.ts-autotag',
-  require 'kickstart.plugins.neo-tree',
+  -- require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.render-markdown',
   require 'kickstart.plugins.tagalong',
   require 'kickstart.plugins.copilot',
@@ -933,6 +934,7 @@ require('lazy').setup({
   require 'kickstart.plugins.lsp-file-operations',
   require 'kickstart.plugins.vim-fugitive',
   require 'kickstart.plugins.window-separator',
+  require 'kickstart.plugins.oil',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
