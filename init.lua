@@ -599,7 +599,17 @@ require('lazy').setup({
       local servers = {
         -- clangd = {},
         -- gopls = {},
-        -- pyright = {},
+        basedpyright = {
+          settings = {
+            basedpyright = {
+              disableOrganizeImports = true, -- Using Ruff
+              analysis = {
+                typeCheckingMode = 'standard', -- turn to 'off' for using mypy
+              },
+            },
+          },
+        },
+
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -609,6 +619,15 @@ require('lazy').setup({
         -- But for many setups, the LSP (`tsserver`) will work just fine
         -- tsserver = {},
         --
+        ruff = {
+          init_options = {
+            settings = {
+              lint = {
+                enable = false,
+              },
+            },
+          },
+        },
         lemminx = {
           filetypes = { 'xml', 'xsd', 'xsl', 'xslt', 'svg', 'conaryrecipe' },
           settings = {
@@ -700,7 +719,7 @@ require('lazy').setup({
         lua = { 'stylua' },
         xml = { 'xmlformat' },
         -- Conform can also run multiple formatters sequentially
-        python = { 'isort', 'black' },
+        python = { 'ruff_organize_imports', 'ruff_fix', 'ruff_format' },
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
