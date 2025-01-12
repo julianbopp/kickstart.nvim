@@ -948,7 +948,7 @@ require('lazy').setup({
   -- require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.render-markdown',
   require 'kickstart.plugins.tagalong',
-  require 'kickstart.plugins.copilot',
+  -- require 'kickstart.plugins.copilot',
   require 'kickstart.plugins.vim-slime',
   require 'kickstart.plugins.vimtex',
   require 'kickstart.plugins.vim-tmux-navigator',
@@ -957,6 +957,7 @@ require('lazy').setup({
   require 'kickstart.plugins.vim-fugitive',
   require 'kickstart.plugins.window-separator',
   require 'kickstart.plugins.oil',
+  require 'kickstart.plugins.supermaven',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
