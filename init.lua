@@ -1024,6 +1024,7 @@ require('lazy').setup({
   require 'kickstart.plugins.window-separator',
   require 'kickstart.plugins.oil',
   require 'kickstart.plugins.supermaven',
+  require 'kickstart.plugins.obsidian',
   require 'kickstart.plugins.catppuccin',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
