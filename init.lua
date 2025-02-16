@@ -907,6 +907,7 @@ require('lazy').setup({
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'path' },
+          { name = 'vimtex' },
         },
       }
     end,
@@ -1027,6 +1028,7 @@ require('lazy').setup({
   require 'kickstart.plugins.obsidian',
   require 'kickstart.plugins.catppuccin',
   require 'kickstart.plugins.winbar',
+  require 'kickstart.plugins.cmp-vimtex',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
