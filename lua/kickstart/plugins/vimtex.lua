@@ -9,5 +9,14 @@ return {
     vim.gvimtex_quickfix_mode = 0
     vim.opt.conceallevel = 1
     vim.g.tex_conceal = 'abdmg' -- don't show LaTeX logo
+    vim.g.vimtex_grammar_textidote = {
+      jar = '~/.local/share/textidote.jar',
+      args = '--check en --firstlang de',
+    }
+    vim.g.vimtex_compiler_latexmk = {
+      options = {
+        '--shell-escape',
+      },
+    }
   end,
 }

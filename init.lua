@@ -349,6 +349,7 @@ require('lazy').setup({
         { '<leader>w', group = '[W]orkspace' },
         { '<leader>t', group = '[T]oggle' },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+        { '<leader>C', group = '[C]hatGPT', mode = { 'n', 'v' } },
       },
     },
   },
@@ -661,14 +662,39 @@ require('lazy').setup({
         basedpyright = {
           settings = {
             basedpyright = {
+              reportPrivateImportUsage = 'none',
               disableOrganizeImports = true, -- Using Ruff
               analysis = {
-                typeCheckingMode = 'standard', -- turn to 'off' for using mypy
+                typeCheckingMode = 'basic', -- turn to 'off' for using mypy
+                diagnosticSeverityOverrides = {
+                  reportPrivateImportUsage = 'none',
+                },
               },
             },
           },
         },
-
+        ltex = {
+          filetypes = { 'markdown', 'tex' },
+          on_attach = function()
+            require('ltex_extra').setup {
+              -- This is where your dictionary will be stored! Replace this directory with
+              -- whatever you want!
+              path = vim.fn.expand '~' .. '/.config/nvim/ltex',
+            }
+            -- ...
+          end,
+          flags = { debounce_text_changes = 300 },
+          settings = {
+            ltex = {
+              language = 'en-US',
+              additional_rules = {
+                enablePickyRules = true,
+                motherTongue = 'de-DE',
+                languageModel = '~/ngrams/',
+              },
+            },
+          },
+        },
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -780,7 +806,7 @@ require('lazy').setup({
           lsp_format_opt = 'fallback'
         end
         return {
-          timeout_ms = 500,
+          timeout_ms = 5000,
           lsp_format = lsp_format_opt,
         }
       end,
@@ -789,9 +815,18 @@ require('lazy').setup({
         xml = { 'xmlformat' },
         -- Conform can also run multiple formatters sequentially
         python = { 'ruff_organize_imports', 'ruff_fix', 'ruff_format' },
+        tex = { 'latexindent' },
+        markdown = { 'prettier', 'mdslw' },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
+      },
+      formatters = {
+        latexindent = {
+          prepend_args = function(self, ctx)
+            return { '-m' }
+          end,
+        },
       },
     },
   },
@@ -836,7 +871,9 @@ require('lazy').setup({
       -- See `:help cmp`
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
-      luasnip.config.setup {}
+      luasnip.config.setup {
+        enable_autosnippets = true,
+      }
 
       cmp.setup {
         snippet = {
@@ -1009,7 +1046,7 @@ require('lazy').setup({
   --
   -- require 'kickstart.plugins.debug',
   require 'kickstart.plugins.indent_line',
-  -- require 'kickstart.plugins.lint',
+  require 'kickstart.plugins.lint',
   require 'kickstart.plugins.autopairs',
   require 'kickstart.plugins.ts-autotag',
   -- require 'kickstart.plugins.neo-tree',
@@ -1029,6 +1066,9 @@ require('lazy').setup({
   require 'kickstart.plugins.catppuccin',
   require 'kickstart.plugins.winbar',
   require 'kickstart.plugins.cmp-vimtex',
+  require 'kickstart.plugins.ltex-extra',
+  require 'custom.plugins.none-ls-nvim',
+  -- require 'custom.plugins.chatgpt-nvim',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
@@ -1076,3 +1116,31 @@ lspconfig.util.default_config = vim.tbl_extend('force', lspconfig.util.default_c
 })
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+
+-- vim.api.nvim_create_autocmd('FileType', {
+--   pattern = 'tex',
+--   callback = function()
+--     vim.opt_local.textwidth = 80
+--   end,
+-- })
+
+-- Snippets
+require('luasnip.loaders.from_lua').load { paths = '~/.config/nvim/lua/kickstart/snippets/' }
+
+-- ChatGPT keybindings
+local wk = require 'which-key'
+wk.add {
+  { '<leader>Cc', '<cmd>ChatGPT<CR>', desc = 'ChatGPT' },
+  { '<leader>Ce', '<cmd>ChatGPTEditWithInstruction<CR>', desc = 'Edit with instruction', mode = { 'n', 'v' } },
+  { '<leader>Cg', '<cmd>ChatGPTRun grammar_correction<CR>', desc = 'Grammar Correction', mode = { 'n', 'v' } },
+  { '<leader>Ct', '<cmd>ChatGPTRun translate<CR>', desc = 'Translate', mode = { 'n', 'v' } },
+  { '<leader>Ck', '<cmd>ChatGPTRun keywords<CR>', desc = 'Keywords', mode = { 'n', 'v' } },
+  { '<leader>Cd', '<cmd>ChatGPTRun docstring<CR>', desc = 'Docstring', mode = { 'n', 'v' } },
+  { '<leader>Ca', '<cmd>ChatGPTRun add_tests<CR>', desc = 'Add Tests', mode = { 'n', 'v' } },
+  { '<leader>Co', '<cmd>ChatGPTRun optimize_code<CR>', desc = 'Optimize Code', mode = { 'n', 'v' } },
+  { '<leader>Cs', '<cmd>ChatGPTRun summarize<CR>', desc = 'Summarize', mode = { 'n', 'v' } },
+  { '<leader>Cf', '<cmd>ChatGPTRun fix_bugs<CR>', desc = 'Fix Bugs', mode = { 'n', 'v' } },
+  { '<leader>Cx', '<cmd>ChatGPTRun explain_code<CR>', desc = 'Explain Code', mode = { 'n', 'v' } },
+  { '<leader>Cr', '<cmd>ChatGPTRun roxygen_edit<CR>', desc = 'Roxygen Edit', mode = { 'n', 'v' } },
+  { '<leader>Cl', '<cmd>ChatGPTRun code_readability_analysis<CR>', desc = 'Code Readability Analysis', mode = { 'n', 'v' } },
+}
